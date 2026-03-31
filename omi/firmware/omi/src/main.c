@@ -129,6 +129,14 @@ static void boot_ready_sequence(void)
 
 void set_led_state()
 {
+    // If user has toggled LED off via button, keep it off
+    extern bool led_state;
+    if (!led_state) {
+        led_off();
+        return;
+    }
+
+    
     // If device is off, turn off all LEDs immediately
     if (is_off) {
         led_off();
